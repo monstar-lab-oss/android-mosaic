@@ -1,11 +1,11 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.mosaic.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.mosaic.library)
 }
 
 android {
-    namespace = "io.monstarlab.mosaic.lib"
+    namespace = "io.monstarlab.mosaic.slider"
     defaultConfig {
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -19,6 +19,14 @@ android {
             )
         }
     }
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
+    }
 }
 
 kotlin {
@@ -28,6 +36,9 @@ kotlin {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.bundles.compose.core)
+    testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
